@@ -1,8 +1,9 @@
-import express, {Express, Request, Response} from 'express';
+import express, { Express } from 'express';
 import dotenv from 'dotenv';
 dotenv.config();
 
 import Tour from './models/tours.model';
+import clientRoutes from './routes/client/index.route';
 
 const app: Express = express();
 const port: (number | string) = process.env.PORT || 3000;
@@ -10,23 +11,9 @@ const port: (number | string) = process.env.PORT || 3000;
 app.set('views', './views');
 app.set('view engine', 'pug');
 
-app.get('/tours', async (req: Request, res: Response) =>{
-    //SELECT * FROM tours WHERE deleted = false AND status = 'active'
-    const tours = await Tour.findAll({
-        where: {
-            deleted: false,
-            status: 'active'
-        },
-        raw: true
-    });
+app.use(express.static('public'));
 
-    console.log(tours);
-
-    res.render("client/pages/tours/index", {
-        pageTitle: "Danh sách tour",
-        tours: tours
-    });
-});
+clientRoutes(app);
 
 app.listen(port, () => {
     console.log(`App listening on port ${port}!`);
