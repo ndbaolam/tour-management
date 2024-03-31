@@ -3,4 +3,8 @@ html
     head 
         title Danh sach tour 
     body 
-        h1 Danh sah tour
+        h1 Trang Danh sách tour
+
+        ul
+            each item in tours
+                li #{item.title}
