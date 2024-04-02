@@ -2,7 +2,6 @@ import express, { Express } from 'express';
 import dotenv from 'dotenv';
 dotenv.config();
 
-import Tour from './models/tours.model';
 import clientRoutes from './routes/client/index.route';
 
 const app: Express = express();

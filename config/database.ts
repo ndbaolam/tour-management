@@ -2,7 +2,7 @@ import { Sequelize } from "sequelize";
 
 const sequelize = new Sequelize(
     process.env.DATABASE_NAME, // Tên database
-    'root', // Username
+    process.env.DATABASE_USERNAME, // Username
     process.env.DATABASE_PASSWORD, // Password
     {
        host: process.env.DATABASE_HOST,
