@@ -8,7 +8,7 @@ const clientRoutes = (app: Express): void => {
 
     app.use("/categories", categoryRoutes);
 
-    app.use('/users', userRoutes);
+    app.use('/user', userRoutes);
 }
 
 export default clientRoutes;

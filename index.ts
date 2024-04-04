@@ -1,5 +1,6 @@
 import express, { Express } from 'express';
 import dotenv from 'dotenv';
+import moment from 'moment';
 import bodyParser from 'body-parser';
 
 import clientRoutes from './routes/client/index.route';
@@ -13,6 +14,9 @@ app.set('views', './views');
 app.set('view engine', 'pug');
 
 app.use(express.static('public'));
+
+// App Local Variables
+app.locals.moment = moment;
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
