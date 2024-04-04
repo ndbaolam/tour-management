@@ -8,12 +8,9 @@ block main
       .row
         .col-6
           .inner-images
-            .inner-image
-              img(src="https://backend.daca.vn/assets/tour/images/tour-ha-long.jpg")
-            .inner-image
-              img(src="https://backend.daca.vn/assets/tour/images/tour-ha-long-2.jpg")
-            .inner-image
-              img(src="https://backend.daca.vn/assets/tour/images/tour-ha-long-3.jpg")
+            each image in tourDetail.images
+                .inner-image
+                    img(src=image)
 
         .col-6
           .inner-title #{tourDetail.title}
