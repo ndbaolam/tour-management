@@ -8,9 +8,21 @@ block main
       .row
         .col-6
           .inner-images
-            each image in tourDetail.images
-                .inner-image
-                    img(src=image)
+            div(class="swiper swiperSliderMain")
+              .swiper-wrapper
+                each image in tourDetail.images
+                  .swiper-slide
+                    .inner-image
+                      img(src=image)
+              .swiper-button-next
+              .swiper-button-prev
+
+            div(class="swiper swiperSliderThumb")
+              .swiper-wrapper
+                each image in tourDetail.images
+                  .swiper-slide
+                    .inner-image
+                      img(src=image)
 
         .col-6
           .inner-title #{tourDetail.title}
