@@ -14,3 +14,53 @@ var swiperSliderThumb = new Swiper(".swiperSliderThumb", {
     },
 });
 //End Slide Tour Detail
+
+//Cart
+const cart = localStorage.getItem("cart");
+if(!cart) {
+    localStorage.setItem("cart", JSON.stringify([]));
+}
+
+//Show alert
+const alertAddCartSusscess = () => {
+    const elementAlert = document.querySelector("[alert-add-cart-susscess]");
+    if(elementAlert) {
+      elementAlert.classList.remove("alert-hidden");
+  
+      setTimeout(() => {
+        elementAlert.classList.add("alert-hidden");
+      }, 3000);
+    }
+};
+//End Show alert
+
+//Add to cart
+const formAddToCart = document.querySelector('[form-add-to-cart]');
+if(formAddToCart){
+    formAddToCart.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const tourId = parseInt(formAddToCart.getAttribute('tour-id'));
+        const quantity = parseInt(e.target.elements.quantity.value);
+
+        if(tourId && quantity){
+            const cart = JSON.parse(localStorage.getItem("cart"));
+            const existTour = cart.find(item => item.tourId === tourId);
+
+            if(!existTour){
+                const data = {
+                    tourId: tourId,
+                    quantity: quantity
+                };
+
+                cart.push(data);
+            } else {
+                existTour.quantity += quantity;
+            }
+
+            localStorage.setItem("cart", JSON.stringify(cart));
+
+            alertAddCartSusscess();
+        }
+    })
+}
+//End Cart 
