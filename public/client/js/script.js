@@ -1,3 +1,19 @@
+//Categoris Slide
+const swiperCategory = document.querySelector('.swiper-category');
+if(swiperCategory){
+    var swiper = new Swiper(".swiper-category", {
+        spaceBetween: 30,
+        pagination: {
+          el: ".swiper-pagination",
+          clickable: true,
+        },
+        // autoplay: {
+        //     delay: 3000,
+        //   },
+    });
+}
+//End categories slide
+
 //Slide Tour Detail
 const swiperSlider = document.querySelector(".swiperSliderThumb");
 if(swiperSlider) {

@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Merienda:wght@300..900&display=swap');
+
+body{
+  font-family: "Merienda", cursive;
+}
+
 /* Header */
 .header {
   border-bottom: 1px solid #ddd;
@@ -22,6 +28,10 @@
 .header .inner-menu > ul > li {
   margin-left: 20px;
 }
+
+.header a{
+  text-decoration: none;
+}
 /* End Header */
 
 /* Footer */
@@ -30,6 +40,32 @@
   color: #fff;
   text-align: center;
   padding: 10px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer ul{
+  list-style: none;
+  padding: 15px;
+  margin: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.footer ul li{
+  margin-left: 20px;
+}
+
+.footer ul li a{
+  color: #fff;
+}
+
+.footer ul li a:hover{
+  color: #c12026;
 }
 /* End Footer */
 
@@ -46,6 +82,69 @@
 }
 /* End box-head */
 
+/*Categories*/
+.card{
+  position: relative;
+  width: 250px;
+  height: fit-content;
+  transition: all 0.3s ease 0s;
+}
+
+.card .card-body{
+  position: relative;
+}
+
+.card img{
+  height: 180px;
+}
+
+.card:hover{
+  transform: scale(1.2);
+  -webkit-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
+  -moz-box-shadow: 0px 5px 40px -10px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  transition: all 0.3s ease 0s;
+  z-index: 10;
+}
+
+.card .card-body a{
+  transition: all 0.3s ease 0s;
+}
+
+.card .card-body a:hover{
+  color: #333;
+  background: white;
+  border: #333 1px solid;
+  transition: all 0.3s ease 0s;
+}
+
+.swiper {
+  max-width: 800px;
+  max-height: 500px;
+  width: 100%;
+  height: 100%;
+  background: rgba(128, 128, 128, 0.212);
+  margin-bottom: 20px;
+}
+
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: #e0e0e0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 15% 100%;
+}
+/*End categories*/
+
 /* tour-detail */
 .tour-detail .inner-images .inner-image {
   width: 100%;
@@ -57,7 +156,6 @@
 .tour-detail .inner-images .inner-image img {
   width: 100%;
   height: 100%;
-  object-fit: contain;
 }
 
 .tour-detail .inner-title {

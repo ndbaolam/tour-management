@@ -6,10 +6,19 @@ block main
     .row
       .col-12
         +box-head(pageTitle)
+    
+    .row
+        div(class="swiper swiper-category")
+          div(class="swiper-wrapper")
+            each item in categories
+              .swiper-slide
+                a(href=`/tours/${item.slug}`)
+                  img(src=item.image)
+          div(class="swiper-pagination")
 
     .row
       each item in categories
-        .col-6.mb-3
+        .col-4.mb-3
           div(class="card")
             img(src=item.image)
             div(class="card-body")

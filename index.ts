@@ -13,7 +13,7 @@ const port: (number | string) = process.env.PORT || 3000;
 app.set('views', './views');
 app.set('view engine', 'pug');
 
-app.use(express.static('public'));
+app.use(express.static(__dirname + '/public'));
 
 // App Local Variables
 app.locals.moment = moment;

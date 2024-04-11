@@ -1,36 +1,43 @@
 import { Request, Response } from "express";
-import Tour from "../../models/tours.model";
 import sequelize from "../../config/database";
 import { QueryTypes } from "sequelize";
 
-export const index = async (req: Request, res: Response) =>{
+// [GET] /tours/:slugCategory
+export const index = async (req: Request, res: Response) => {
     const slugCategory = req.params.slugCategory;
-
-    const query = `
-        SELECT tours.*, price * (1 - discount/100) AS price_special
-        FROM tours
-        JOIN tours_categories ON tours.id = tours_categories.tour_id
-        JOIN categories ON tours_categories.category_id = categories.id
-        WHERE
-            categories.slug = '${slugCategory}'
-            AND tours.deleted = false
-            AND tours.status = 'active'
-            AND categories.deleted = false
-            AND categories.status = 'active';
-    `;
-
-    const tours = await sequelize.query(query,{
-        model: Tour,
-        raw: true,
+  
+    const tours = await sequelize.query(`
+      SELECT tours.*
+      FROM tours
+      JOIN tours_categories ON tours.id = tours_categories.tour_id
+      JOIN categories ON tours_categories.category_id = categories.id
+      WHERE
+        categories.slug = '${slugCategory}'
+        AND categories.deleted = false
+        AND categories.status = 'active'
+        AND tours.deleted = false
+        AND tours.status = 'active';
+    `, {
+        type: QueryTypes.SELECT,
+        raw: true
     });
-
-    //console.log(tours);
-
+  
+    for (const tour of tours) {
+      if(tour["images"]) {
+        const images = JSON.parse(tour["images"]);
+        tour["image"] = images[0];
+      }
+  
+      tour["price_special"] = tour["price"] * (1 - tour["discount"]/100);
+    }
+  
+    console.log(tours);
+  
     res.render("client/pages/tours/index", {
-        pageTitle: "Danh sách tour",
-        tours: tours
+      pageTitle: "Danh sách tour",
+      tours: tours
     });
-}
+  }
 
 export const detail = async (req: Request, res: Response) => {
     const slugTour: string = req.params.slugTour;
