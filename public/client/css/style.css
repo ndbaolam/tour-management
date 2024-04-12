@@ -127,7 +127,7 @@ body{
   margin-bottom: 20px;
 }
 
-.swiper-slide {
+.swiper-category .swiper-slide {
   text-align: center;
   font-size: 18px;
   background: #e0e0e0;
