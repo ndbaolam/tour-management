@@ -193,4 +193,40 @@ const updateQuantityInCart = () => {
 }
 //End update quantity
 
+//Send order to server
+const formOrder = document.querySelector('[form-order]');
+if(formOrder){
+    formOrder.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const cart = JSON.parse(localStorage.getItem('cart'));
+        
+        const fullName = e.target.fullName.value;
+        const phone = e.target.phone.value;
+        const note = e.target.note.value;
+
+        const data = {
+            info:{
+                fullName: fullName,
+                phone: phone,
+                note: note,
+            },
+            cart: cart
+        };
+
+        fetch('/order', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data)
+            //Send API to backend
+        })
+        .then(res => res.json())
+        .then(data => {
+            console.log(data);
+        });
+    });
+}
+//End send order to server
+
 drawListTable();
