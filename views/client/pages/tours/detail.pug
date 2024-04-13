@@ -62,7 +62,14 @@ block main
               type="submit"
               class="btn btn-success btn-block"
             ) Thêm vào giỏ hàng
-
+      
+      .row
+        .col-6
+          div(id="map")
+            input(
+              type="hidden"
+              value=tourDetail.coordinate
+            )
 
       .row
         .col-12

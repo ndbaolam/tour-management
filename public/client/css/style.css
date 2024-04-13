@@ -300,3 +300,8 @@ button[btn-delete]:hover{
   transition: all 0.4s ease 0s;
 }
 /*End cart page*/
+
+#map { 
+  height: 538.4px; 
+  width: 538.4px;
+}

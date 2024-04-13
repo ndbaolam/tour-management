@@ -229,4 +229,39 @@ if(formOrder){
 }
 //End send order to server
 
+//Map
+const tourMap = document.getElementById('map');
+if(tourMap) {
+    const coordinates = tourMap.firstElementChild.defaultValue;
+    const [x, y] = coordinates.split(',');
+    const direction = [parseFloat(x), parseFloat(y)];
+
+    const map = L.map('map', {
+        center: direction,
+        zoom: 10,
+        preferCanvas: true
+    })
+
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }).addTo(map);
+
+    const marker = L.marker(direction).addTo(map);
+
+    marker.on("click", () => {
+        const pos = map.latLngToLayerPoint(marker.getLatLng());
+        pos.y -= 25;
+        const fx = new L.PosAnimation();
+    
+        fx.once('end',() => {
+            pos.y += 25;
+            fx.run(marker._icon, pos, 0.8);
+        });
+    
+        fx.run(marker._icon, pos, 0.3);
+    });
+}
+//End map
+
 drawListTable();
