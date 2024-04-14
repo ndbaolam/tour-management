@@ -247,6 +247,18 @@ if(tourMap) {
         attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     }).addTo(map);
 
+    //Get user location
+    if("geolocation" in navigator){
+        navigator.geolocation.getCurrentPosition((position) => {
+            console.log(position);
+            const userLocation = [position.coords.latitude,position.coords.longitude]
+            L.marker(userLocation)
+                .addTo(map)
+                .bindPopup("You are here");
+        });
+    }
+    //End get user location
+
     const marker = L.marker(direction).addTo(map);
 
     marker.on("click", () => {
