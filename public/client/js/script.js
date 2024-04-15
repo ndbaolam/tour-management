@@ -49,7 +49,7 @@ showMiniCart();
 //Cart
 const cart = localStorage.getItem("cart");
 if(!cart) {
-    localStorage.setItem("cart", JSON.stringify([]));
+    window.localStorage.setItem("cart", '[]');
 }
 
 //Show alert
