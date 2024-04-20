@@ -1,6 +1,10 @@
 import { Request, Response } from "express";
 import Tour from "../../models/tours.model";
+import Category from "../../models/category.model";
+import { generateTourCode } from "../../helpers/generate.helper";
+import { systemConfig } from "../../config/system";
 
+//[GET] /admin/tours/
 export const index = async (req: Request, res: Response) => {
   const tours = await Tour.findAll({
     where: {
@@ -21,4 +25,46 @@ export const index = async (req: Request, res: Response) => {
     pageTitle: 'Danh sách tour',
     tours: tours
   })
+}
+
+//[GET] /admin/tours/create
+export const create = async(req: Request, res: Response) => {
+  const categories = await Category.findAll({
+    where: {
+      deleted: false
+    },
+    raw: true
+  });
+
+  res.render('admin/pages/tours/create', {
+    pageTitle: "Thêm mới tour",
+    categories: categories
+  })
+}
+
+//[POST] /admin/tours/create
+export const createPost = async(req: Request, res: Response) => {
+  const countTour = await Tour.count();
+  const code = generateTourCode(countTour + 1);
+
+  if(req.body.position === ""){
+    req.body.position = countTour + 1;
+  } else {
+    req.body.position = parseInt(req.body.position);
+  }
+
+  const dataTour = {
+    title: req.body.title,
+    code: code,
+    price: parseInt(req.body.price),
+    discount: parseInt(req.body.discount),
+    stock: parseInt(req.body.stock),
+    timeStart: req.body.timrStart,
+    position: req.body.position,
+    status: req.body.status
+  };
+
+  const tour = await Tour.create(dataTour);
+
+  res.redirect('back');
 }
