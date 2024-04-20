@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import Tour from "../../models/tours.model";
 import Category from "../../models/category.model";
+import TourCategory from "../../models/tour-category.model";
 import { generateTourCode } from "../../helpers/generate.helper";
 import { systemConfig } from "../../config/system";
 
@@ -65,6 +66,12 @@ export const createPost = async(req: Request, res: Response) => {
   };
 
   const tour = await Tour.create(dataTour);
+  const tourId = tour.dataValues.id;
+
+  await TourCategory.create({
+    tour_id: tourId,
+    category_id: parseInt(req.body.category_id)
+  });
 
   res.redirect('back');
 }
