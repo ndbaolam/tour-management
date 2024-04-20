@@ -4,6 +4,8 @@ import moment from 'moment';
 import bodyParser from 'body-parser';
 
 import clientRoutes from './routes/client/index.route';
+import adminRoutes from './routes/admin/index.route';
+import { systemConfig } from './config/system';
 
 dotenv.config();
 
@@ -17,6 +19,7 @@ app.use(express.static(__dirname + '/public'));
 
 // App Local Variables
 app.locals.moment = moment;
+app.locals.prefixAdmin = systemConfig.prefixAdmin;
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -25,6 +28,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 clientRoutes(app);
+adminRoutes(app);
 
 app.listen(port, () => {
     console.log(`App listening on port ${port}!`);
