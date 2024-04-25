@@ -90,8 +90,9 @@
     width: 150px;
     height: auto;
     margin-top: 15px;
+    margin-right: 5px;
     border: 1px solid #ddd;
-    padding: 15px;
+    padding: 5px;
     border-radius: 5px;
   }
   
