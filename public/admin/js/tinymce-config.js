@@ -23,4 +23,5 @@ tinymce.init({
         };
         input.click();
     },
+    images_upload_url: '/admin/upload',
 });

@@ -1,6 +1,7 @@
 import express, { Express } from 'express';
 import dotenv from 'dotenv';
 import moment from 'moment';
+import path from 'path';
 import bodyParser from 'body-parser';
 
 import clientRoutes from './routes/client/index.route';
@@ -20,6 +21,13 @@ app.use(express.static(__dirname + '/public'));
 // App Local Variables
 app.locals.moment = moment;
 app.locals.prefixAdmin = systemConfig.prefixAdmin;
+
+// TinyMCE
+app.use(
+    "/tinymce",
+    express.static(path.join(__dirname, "node_modules", "tinymce"))
+);
+// End TinyMCE
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));

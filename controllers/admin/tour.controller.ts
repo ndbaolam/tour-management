@@ -4,6 +4,7 @@ import Category from "../../models/category.model";
 import TourCategory from "../../models/tour-category.model";
 import { generateTourCode } from "../../helpers/generate.helper";
 import { systemConfig } from "../../config/system";
+import { scheduler } from "timers/promises";
 
 //[GET] /admin/tours/
 export const index = async (req: Request, res: Response) => {
@@ -63,7 +64,9 @@ export const createPost = async(req: Request, res: Response) => {
     timeStart: req.body.timrStart,
     position: req.body.position,
     status: req.body.status,
-    image: JSON.stringify(req.body.images)
+    image: JSON.stringify(req.body.images),
+    information: req.body.information,
+    schedule: req.body.schedule
   };
 
   const tour = await Tour.create(dataTour);
